@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import styles from './Stuff.module.css'
 import Footer from '../components/Footer'
-import StuffClient from './page.client'
+import StuffContent from './StuffContent'
+import ThemeToggle from '../components/ThemeToggle'
 
 export const metadata: Metadata = {
   title: 'My Stuff - MrErenK',
@@ -14,7 +15,10 @@ export default function Stuff() {
       <div className={styles.content}>
         <h1 className={styles.title}>My Stuff</h1>
         <p className={styles.subtitle}>Here you can find the projects I'm working on.</p>
-        <StuffClient />
+        <div className={styles.themeToggleWrapper}>
+          <ThemeToggle />
+        </div>
+        <StuffContent />
       </div>
       <Footer />
     </div>

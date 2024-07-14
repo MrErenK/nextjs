@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import styles from './About.module.css'
 import Footer from '../components/Footer'
-import AboutClient from './page.client'
+import ThemeToggle from '../components/ThemeToggle'
 
 export const metadata: Metadata = {
   title: 'MrErenK - About Me',
@@ -23,7 +23,9 @@ export default function About() {
           </p>
         </div>
       </div>
-      <AboutClient />
+      <div className="absolute top-5 right-5">
+        <ThemeToggle />
+      </div>
       <Footer />
     </div>
   )

@@ -1,16 +1,5 @@
-import { Metadata } from 'next'
-import styles from './Home.module.css'
-import HomeClient from './page.client'
+import { redirect } from 'next/navigation'
 
-export const metadata: Metadata = {
-  title: 'MrErenK - Home',
-  description: 'Welcome to MrErenK\'s personal website.',
-}
-
-export default function Home() {
-  return (
-    <div className={`${styles.pageWrapper} ${styles.fadeIn}`}>
-      <HomeClient />
-    </div>
-  )
+export default function RootPage() {
+  redirect('/home')
 }
