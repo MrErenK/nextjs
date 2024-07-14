@@ -1,9 +1,7 @@
 import { Metadata } from 'next'
 import styles from './Contact.module.css'
-import ContactForm from './ContactForm'
-import ThemeToggle from '../components/ThemeToggle'
 import Footer from '../components/Footer'
-import Loading from '../components/Loading'
+import ContactClient from './page.client'
 
 export const metadata: Metadata = {
   title: 'Contact Me - MrErenK',
@@ -13,15 +11,11 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <div className={`${styles.contactPage}`}>
-      <div className={styles.themeToggleWrapper}>
-        <ThemeToggle />
-      </div>
       <div className={styles.content}>
         <h1 className={styles.title}>Contact Me</h1>
-        <ContactForm />
+        <ContactClient />
       </div>
       <Footer />
-      <Loading />
     </div>
   )
 }

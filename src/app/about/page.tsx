@@ -1,10 +1,7 @@
 import { Metadata } from 'next'
 import styles from './About.module.css'
 import Footer from '../components/Footer'
-import dynamic from 'next/dynamic'
-import Loading from '../components/Loading'
-
-const ThemeToggle = dynamic(() => import('../components/ThemeToggle'), { ssr: false })
+import AboutClient from './page.client'
 
 export const metadata: Metadata = {
   title: 'MrErenK - About Me',
@@ -26,11 +23,8 @@ export default function About() {
           </p>
         </div>
       </div>
-      <div className="absolute top-5 right-5">
-        <ThemeToggle />
-      </div>
+      <AboutClient />
       <Footer />
-      <Loading />
     </div>
   )
 }
