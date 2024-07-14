@@ -9,7 +9,6 @@ import ThemeToggle from '../components/ThemeToggle';
 export default function Stuff() {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
 
   useEffect(() => setMounted(true), []);
 
