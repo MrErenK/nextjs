@@ -2,6 +2,8 @@
 
 import dynamic from 'next/dynamic'
 import styles from './Home.module.css'
+import Loading from './components/Loading'
+import { useState, useEffect } from 'react'
 
 // Dynamically import client-side components
 const MovingBackground = dynamic(() => import('./components/MovingBackground'), { 
@@ -14,6 +16,16 @@ const TypingEffect = dynamic(() => import('./components/TypingEffect'), {
 })
 
 export default function HomeClient() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
+  
+  if (isLoading) {
+    return <Loading />
+  }
+  
   return (
     <>
       <MovingBackground imageUrl="/space.jpg" />
