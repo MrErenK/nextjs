@@ -40,14 +40,14 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
       </head>
       <body className={inter.className} style={{ backgroundColor: 'var(--bg-color)' }}>
-        <Providers>
-          <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen">
+          <Providers>
             <Navbar />
             <main className="flex-grow relative">
               {children}
             </main>
-          </div>
-        </Providers>
+          </Providers>
+        </div>
       </body>
     </html>
   )
