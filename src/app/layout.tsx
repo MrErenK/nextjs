@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import React from 'react'
 import { Inter } from 'next/font/google'
 import './styles/globals.css'
@@ -23,8 +23,14 @@ export const metadata: Metadata = {
     'msapplication-config': '/icons/browserconfig.xml',
     'theme-color': '#ffffff',
     'msapplication-tap-highlight': 'no',
+    'X-UA-Compatible': 'IE=edge',
+    'google': 'notranslate',
   },
-  viewport: 'width=device-width,initial-scale=1',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -34,11 +40,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="google" content="notranslate" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-      </head>
       <body className={inter.className} style={{ backgroundColor: 'var(--bg-color)' }}>
         <div className="flex flex-col min-h-screen">
           <Providers>

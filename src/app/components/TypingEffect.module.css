@@ -1,0 +1,22 @@
+.typingEffectContainer {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    animation: blink 0.7s infinite;
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

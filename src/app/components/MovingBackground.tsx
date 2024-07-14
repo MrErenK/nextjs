@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from './MovingBackground.module.css';
 
 interface MovingBackgroundProps {
@@ -10,6 +11,7 @@ interface MovingBackgroundProps {
 const MovingBackground: React.FC<MovingBackgroundProps> = ({ imageUrl }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
@@ -40,12 +42,21 @@ const MovingBackground: React.FC<MovingBackgroundProps> = ({ imageUrl }) => {
 
   return (
     <div 
-      className={`${styles.backgroundContainer} ${isMobile ? styles.mobile : ''}`}
+      className={`${styles.backgroundContainer} ${isMobile ? styles.mobile : ''} ${isLoaded ? styles.loaded : ''}`}
       style={{
-        backgroundImage: `url(${imageUrl})`,
         transform: isMobile ? 'none' : `translate(${position.x}px, ${position.y}px)`
       }}
-    />
+    >
+      <Image
+        src={imageUrl}
+        fill
+        style={{ objectFit: 'cover' }}
+        quality={100}
+        priority
+        onLoad={() => setIsLoaded(true)}
+        alt="Background"
+      />
+    </div>
   );
 };
 
