@@ -1,0 +1,59 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #61dafb;
+  --primary-color-hover: #4fa8d5;
+  --form-bg-color: rgba(0, 0, 0, 0.1);
+  --input-bg-color: rgba(255, 255, 255, 0.8);
+  --button-text-color: #000000;
+  --content-background: rgba(0, 0, 0, 0.1);
+  --title-color: #0066cc;
+  --subtitle-color: #0066cc;
+  --card-bg-color: #ffffff;
+  --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --button-color: #0070f3;
+  --button-bg-color: #0070f3;
+}
+
+.dark {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --primary-color: #61dafb;
+  --primary-color-hover: #4fa8d5;
+  --form-bg-color: rgba(255, 255, 255, 0.1);
+  --input-bg-color: rgba(0, 0, 0, 0.3);
+  --button-text-color: #1a1a1a;
+  --error-color: #ff6b6b;
+  --content-background: rgba(255, 255, 255, 0.1);
+  --title-color: #61dafb;
+  --subtitle-color: #61dafb;
+  --card-bg-color: rgba(255, 255, 255, 0.1);
+  --card-shadow: none;
+  --button-color: #61dafb;
+  --button-bg-color: #61dafb;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

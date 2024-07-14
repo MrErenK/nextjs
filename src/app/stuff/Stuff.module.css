@@ -1,0 +1,164 @@
+.stuffPage {
+  min-height: 100vh;
+  padding: 2rem;
+  padding-top: 60px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--title-color);
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.linkCard {
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  background-color: var(--card-bg-color);
+  box-shadow: var(--card-shadow);
+}
+
+.linkCard:hover {
+  transform: translateY(-5px);
+}
+
+.linkCard h3 {
+  margin-bottom: 0.5rem;
+}
+
+.linkCard p {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  align-self: flex-start;
+  color: var(--button-color);
+}
+
+.button::after {
+  content: '→';
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.button:hover::after {
+  transform: translateX(5px);
+}
+
+.mcServer {
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+  background-color: var(--card-bg-color);
+  box-shadow: var(--card-shadow);
+}
+
+.mcServer h3 {
+  margin-bottom: 0.5rem;
+}
+
+.mcServer p {
+  margin-bottom: 1rem;
+}
+
+.mcServer .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+}
+
+.mcServer .button:hover {
+  opacity: 0.8;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--title-color);
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.stuffPage {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .linksGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .linkCard {
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.themeToggleWrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
