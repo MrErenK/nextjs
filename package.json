@@ -14,6 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@sendgrid/mail": "^8.1.3",
+    "@vercel/speed-insights": "^1.0.12",
     "mailgun.js": "^10.2.1",
     "next": "14.2.5",
     "next-themes": "^0.3.0",
