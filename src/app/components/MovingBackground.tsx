@@ -18,9 +18,9 @@ const MovingBackground: React.FC<MovingBackgroundProps> = ({ imageUrl }) => {
     setIsMobile(mediaQuery.matches);
 
     const handleResize = () => setIsMobile(mediaQuery.matches);
-    mediaQuery.addListener(handleResize);
+    mediaQuery.addEventListener('change', handleResize);
 
-    return () => mediaQuery.removeListener(handleResize);
+    return () => mediaQuery.removeEventListener('change', handleResize);
   }, []);
 
   useEffect(() => {
