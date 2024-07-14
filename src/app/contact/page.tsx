@@ -3,6 +3,7 @@ import styles from './Contact.module.css'
 import ContactForm from './ContactForm'
 import ThemeToggle from '../components/ThemeToggle'
 import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 
 export const metadata: Metadata = {
   title: 'Contact Me - MrErenK',
@@ -20,6 +21,7 @@ export default function Contact() {
         <ContactForm />
       </div>
       <Footer />
+      <Loading />
     </div>
   )
 }

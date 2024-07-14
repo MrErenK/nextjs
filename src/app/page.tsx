@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import styles from './Home.module.css'
+import Loading from './components/Loading'
 
 // Dynamically import client-side components
 const MovingBackground = dynamic(() => import('./components/MovingBackground'), { 

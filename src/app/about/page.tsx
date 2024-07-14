@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import styles from './About.module.css'
 import Footer from '../components/Footer'
 import dynamic from 'next/dynamic'
+import Loading from '../components/Loading'
 
 const ThemeToggle = dynamic(() => import('../components/ThemeToggle'), { ssr: false })
 
@@ -29,6 +30,7 @@ export default function About() {
         <ThemeToggle />
       </div>
       <Footer />
+      <Loading />
     </div>
   )
 }

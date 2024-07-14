@@ -3,6 +3,7 @@ import styles from './Stuff.module.css'
 import ThemeToggle from '../components/ThemeToggle'
 import StuffContent from './StuffContent'
 import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 
 export const metadata: Metadata = {
   title: 'My Stuff - MrErenK',
@@ -21,6 +22,7 @@ export default function Stuff() {
         <StuffContent />
       </div>
       <Footer />
+      <Loading />
     </div>
   )
 }
