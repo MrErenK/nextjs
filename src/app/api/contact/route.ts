@@ -1,30 +1,29 @@
-// src/app/api/contact/route.ts
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import formData from 'form-data';
+import Mailgun from 'mailgun.js';
+
+const mailgun = new Mailgun(formData);
 
 export async function POST(request: Request) {
   const { name, email, message } = await request.json();
 
-  // Create a nodemailer transporter
-  const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT || '465'),
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-    secure: true,
+  const mg = mailgun.client({
+    username: 'api',
+    key: process.env.MAILGUN_API_KEY || 'key-yourkeyhere'
   });
 
   try {
-    // Send email
-    await transporter.sendMail({
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_TO,
+    const response = await mg.messages.create(process.env.MAILGUN_DOMAIN || 'your-domain.mailgun.org', {
+      from: `${name} <${process.env.MAILGUN_FROM_EMAIL}>`,
+      to: [process.env.MAILGUN_TO_EMAIL ?? ''],
       subject: `New message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      html: `<h3>New message from ${name}</h3>
+             <p><strong>Email:</strong> ${email}</p>
+             <p><strong>Message:</strong> ${message}</p>`
     });
 
+    console.log('Email sent successfully:', response);
     return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
   } catch (error) {
     console.error('Error sending email:', error);
