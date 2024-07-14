@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
-        <Link href="/" className={styles.navbarLogo}>
+        <Link href="/home" className={styles.navbarLogo}>
           MrErenK
         </Link>
         <div className={styles.menuIcon} onClick={toggleNavbar}>
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
         </div>
         <ul className={isOpen ? `${styles.navMenu} ${styles.active}` : styles.navMenu}>
           <li className={styles.navItem}>
-            <Link href="/" className={styles.navLinks} onClick={toggleNavbar}>
+            <Link href="/home" className={styles.navLinks} onClick={toggleNavbar}>
               Home
             </Link>
           </li>

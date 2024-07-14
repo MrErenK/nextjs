@@ -32,6 +32,12 @@ const nextConfig = {
     compiler: {
         removeConsole: process.env.NODE_ENV === 'production',
     },
+    experimental: {
+        optimizeServerReact: true,
+        optimizeCss: true,
+        optimizePackageImports: [ 'mailgun.js', 'form-data', '@fortawesome/fontawesome-svg-core', '@fortawesome/free-brands-svg-icons', '@fortawesome/free-solid-svg-icons', '@fortawesome/react-fontawesome', 'sweetalert2' ],
+        optimisticClientCache: true,
+    },
   };
   
   export default nextConfig;
