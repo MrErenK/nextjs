@@ -30,7 +30,7 @@ export default function Home() {
     <>
       <ScrollLock />
       <FadeInEffect>
-        <div className="fixed inset-0 flex flex-col">
+        <div className="min-h-screen md:fixed md:inset-0 flex flex-col">
           <MovingBackground imageUrl="/space.jpg" />
           <div className="flex-1 flex items-center justify-center p-5">
             <div className="z-10">
