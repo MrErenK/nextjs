@@ -17,6 +17,9 @@
   --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   --button-color: #0070f3;
   --button-bg-color: #0070f3;
+  --footer-bg-color-rgb: 97, 218, 251;
+  --footer-text-color: #000000;
+  --footer-link-hover-color: #ffffff;
 }
 
 .dark {
@@ -35,6 +38,9 @@
   --card-shadow: none;
   --button-color: #61dafb;
   --button-bg-color: #61dafb;
+  --footer-bg-color-rgb: 97, 218, 251;
+  --footer-text-color: #000000;
+  --footer-link-hover-color: #1a1a1a;
 }
 
 @layer utilities {
