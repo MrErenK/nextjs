@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
 
 export const metadata: Metadata = {
   title: 'MrErenK - Home',
@@ -23,27 +22,33 @@ const FadeInEffect = dynamic(() =>
   { ssr: false }
 )
 
+// Import ScrollLock component
+const ScrollLock = dynamic(() => import('../components/ScrollLock'), { ssr: false })
+
 export default function Home() {
   return (
-    <FadeInEffect>
-      <div className="fixed inset-0 flex flex-col overflow-hidden">
-        <MovingBackground imageUrl="/space.jpg" />
-        <div className="flex-1 flex items-center justify-center p-5 overflow-auto">
-          <div className="z-10">
-            <div className="text-center p-5 bg-black bg-opacity-50 rounded-3xl max-w-full shadow-lg">
-              <h1 className="text-4xl md:text-5xl font-bold text-white text-shadow">
-                Hello,<br />
-                <TypingEffect 
-                  strings={['I\'m Eren.', 'You can call me MrErenK.', 'I\'m a newbie developer', 'living in Turkiye.']} 
-                  typingSpeed={100}
-                  deletingSpeed={50}
-                  delayBetweenStrings={1000}
-                />
-              </h1>
+    <>
+      <ScrollLock />
+      <FadeInEffect>
+        <div className="fixed inset-0 flex flex-col">
+          <MovingBackground imageUrl="/space.jpg" />
+          <div className="flex-1 flex items-center justify-center p-5">
+            <div className="z-10">
+              <div className="text-center p-5 bg-black bg-opacity-50 rounded-3xl max-w-full shadow-lg">
+                <h1 className="text-4xl md:text-5xl font-bold text-white text-shadow">
+                  Hello,<br />
+                  <TypingEffect 
+                    strings={['I\'m Eren.', 'You can call me MrErenK.', 'I\'m a newbie developer', 'living in Turkiye.']} 
+                    typingSpeed={100}
+                    deletingSpeed={50}
+                    delayBetweenStrings={1000}
+                  />
+                </h1>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </FadeInEffect>
+      </FadeInEffect>
+    </>
   )
 }
