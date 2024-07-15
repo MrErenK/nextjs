@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import styles from './Stuff.module.css'
 import Swal from 'sweetalert2'
 
 export default function StuffContent() {
@@ -57,31 +56,38 @@ export default function StuffContent() {
 
   return (
     <>
-      <div className={styles.linksGrid}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {links.map((link, index) => (
-          <div key={index} className={styles.linkCard}>
-            <h3>{link.title}</h3>
-            <p>{link.description}</p>
-            <a href={link.url} target="_blank" rel="noopener noreferrer" className={styles.button}>Go</a>
+          <div key={index} className="p-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1 bg-card-bg-color shadow-card flex flex-col min-h-[180px]">
+            <h3 className="mb-2">{link.title}</h3>
+            <p className="mb-4 flex-grow">{link.description}</p>
+            <a href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-full transition-all duration-300 cursor-pointer font-bold bg-transparent text-button-color hover:text-text-color hover:shadow-md active:shadow-none text-base">
+              Go
+              <span className="ml-2 transition-transform duration-300 transform group-hover:translate-x-1">→</span>
+            </a>
           </div>
         ))}
       </div>
 
-      <div className={styles.mcServer}>
-        <h3>My MC Server (Survival)</h3>
-        <p>Click below to copy the server IP:</p>
-        <button onClick={() => copyToClipboard('mc.erensprojects.web.tr')} className={styles.button}>
+      <div className="p-6 rounded-lg text-center mb-8 transition-all duration-300 transform hover:-translate-y-1 bg-card-bg-color shadow-card">
+        <h3 className="mb-2 text-title-color">My MC Server (Survival)</h3>
+        <p className="mb-4">Click below to copy the server IP:</p>
+        <button onClick={() => copyToClipboard('mc.erensprojects.web.tr')} className="inline-flex items-center justify-center px-6 py-3 rounded-full transition-all duration-300 cursor-pointer font-bold bg-transparent text-button-color hover:text-text-color hover:shadow-md active:shadow-none text-base">
           {copied ? 'Copied!' : 'Copy IP'}
+          <span className="ml-2 transition-transform duration-300 transform group-hover:translate-x-1">→</span>
         </button>
       </div>
 
-      <h2 className={styles.sectionTitle}>Telegram Channels/Groups</h2>
-      <div className={styles.linksGrid}>
+      <h2 className="text-3xl text-center my-8 text-title-color">Telegram Channels/Groups</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {telegramLinks.map((link, index) => (
-          <div key={index} className={styles.linkCard}>
-            <h3>{link.title}</h3>
-            <p>{link.description}</p>
-            <a href={link.url} target="_blank" rel="noopener noreferrer" className={styles.button}>Go</a>
+          <div key={index} className="p-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1 bg-card-bg-color shadow-card flex flex-col min-h-[180px]">
+            <h3 className="mb-2">{link.title}</h3>
+            <p className="mb-4 flex-grow">{link.description}</p>
+            <a href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 rounded-full transition-all duration-300 cursor-pointer font-bold bg-transparent text-button-color hover:text-text-color hover:shadow-md active:shadow-none text-base">
+              Go
+              <span className="ml-2 transition-transform duration-300 transform group-hover:translate-x-1">→</span>
+            </a>
           </div>
         ))}
       </div>

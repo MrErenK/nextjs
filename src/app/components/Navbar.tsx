@@ -3,13 +3,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from './Navbar.module.css';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const navMenuRef = useRef<HTMLUListElement>(null);
+  const navMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -24,46 +23,49 @@ const Navbar: React.FC = () => {
     };
 
     document.addEventListener('scroll', handleScroll);
+
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled]);
 
-  useEffect(() => {
-    // This effect will run when the pathname changes
-    // It ensures that the active link is highlighted when the page changes
-  }, [pathname]);
-
   const links = ['home', 'stuff', 'about', 'contact'];
 
   return (
-    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.navbarContainer}>
-        <Link href="/home" className={styles.navbarLogo}>
+    <nav className={`fixed top-0 left-0 right-0 h-20 flex justify-center items-center text-xl z-50 transition-all duration-300 ${scrolled ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-50'} backdrop-blur-md`}>
+      <div className="flex justify-between items-center w-full h-20 max-w-7xl px-5">
+        <Link href="/home" className="text-white text-3xl cursor-pointer">
           MrErenK
         </Link>
         <button 
-          className={styles.menuIcon} 
+          className="z-50 block md:hidden bg-transparent border-none text-white text-2xl cursor-pointer transition-transform duration-300 ease-in-out transform hover:scale-110"
           onClick={toggleNavbar}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
         >
           {isOpen ? '✕' : '☰'}
         </button>
-        <ul ref={navMenuRef} className={`${styles.navMenu} ${isOpen ? styles.active : ''}`}>
-          {links.map((link, index) => (
-            <li key={link} className={styles.navItem}>
-              <Link
-                href={`/${link}`}
-                className={`${styles.navLinks} ${pathname === `/${link}` ? styles.active : ''}`}
-                onClick={toggleNavbar}
-                data-index={index}
-              >
-                {link.charAt(0).toUpperCase() + link.slice(1)}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div 
+          ref={navMenuRef}
+          className={`md:flex items-center justify-center md:justify-end fixed md:relative top-20 md:top-0 right-0 w-3/4 sm:w-1/2 md:w-auto h-[calc(100vh-5rem)] md:h-auto overflow-y-auto md:overflow-visible bg-black bg-opacity-90 md:bg-transparent transition-all duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'} backdrop-blur-md`}
+        >
+          <ul className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-center py-4 md:py-0">
+            {links.map((link, index) => (
+              <li key={link} className="w-full md:w-auto my-2 md:my-0 md:mx-2">
+                <Link
+                  href={`/${link}`}
+                  className={`block md:inline-block text-white px-4 py-2 relative hover:text-primary transition-colors duration-300 group ${pathname === `/${link}` ? 'text-primary' : ''}`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="relative overflow-hidden">
+                    {link.charAt(0).toUpperCase() + link.slice(1)}
+                    <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ${pathname === `/${link}` ? 'w-full' : ''} group-hover:w-full`}></span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </nav>
   );

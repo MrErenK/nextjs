@@ -10,6 +10,7 @@
   --form-bg-color: rgba(0, 0, 0, 0.1);
   --input-bg-color: rgba(255, 255, 255, 0.8);
   --button-text-color: #000000;
+  --error-color: #ff6b6b;
   --content-background: rgba(0, 0, 0, 0.1);
   --title-color: #0066cc;
   --subtitle-color: #0066cc;
@@ -47,6 +48,9 @@
   .text-balance {
     text-wrap: balance;
   }
+  .translate-x-full {
+    transform: translateX(100%);
+  }
 }
 
 html, body {
@@ -62,6 +66,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 #jss-server-side {

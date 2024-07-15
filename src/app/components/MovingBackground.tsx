@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
-import styles from './MovingBackground.module.css';
 
 interface MovingBackgroundProps {
   imageUrl: string;
@@ -52,7 +51,9 @@ const MovingBackground: React.FC<MovingBackgroundProps> = React.memo(({ imageUrl
 
   return (
     <div 
-      className={`${styles.backgroundContainer} ${isStatic ? styles.static : ''} ${isLoaded ? styles.loaded : ''}`}
+      className={`fixed top-0 left-0 w-[105%] h-[105%] -z-10 transition-transform duration-100 ease-out overflow-hidden
+                  ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500 ease-in-out
+                  ${isStatic ? 'md:w-full md:h-full' : ''}`}
       style={{
         transform: isStatic ? 'none' : `translate(${position.x}px, ${position.y}px)`
       }}

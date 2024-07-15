@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import styles from './Contact.module.css'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -65,9 +64,9 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={styles.formGroup}>
-        <label htmlFor="name">Name</label>
+    <form onSubmit={handleSubmit} className="w-full max-w-lg bg-form-bg-color p-8 rounded-lg">
+      <div className="mb-6">
+        <label htmlFor="name" className="block mb-2">Name</label>
         <input 
           type="text" 
           id="name" 
@@ -76,10 +75,11 @@ export default function ContactForm() {
           required
           value={formData.name} 
           onChange={handleInputChange} 
+          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base"
         />
       </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="email">Email</label>
+      <div className="mb-6">
+        <label htmlFor="email" className="block mb-2">Email</label>
         <input 
           type="email" 
           id="email" 
@@ -88,10 +88,11 @@ export default function ContactForm() {
           required
           value={formData.email} 
           onChange={handleInputChange} 
+          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base"
         />
       </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="message">Message</label>
+      <div className="mb-6">
+        <label htmlFor="message" className="block mb-2">Message</label>
         <textarea 
           id="message" 
           name="message" 
@@ -101,13 +102,14 @@ export default function ContactForm() {
           value={formData.message} 
           onChange={handleInputChange}
           onBlur={handleBlur}
+          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base"
         ></textarea>
         {showMessageError && (
-          <p className={styles.errorMessage}>Please enter at least 30 characters.</p>
+          <p className="text-error-color text-sm mt-1">Please enter at least 30 characters.</p>
         )}
       </div>
-      <div className={styles.formGroup}>
-        <label className={styles.checkbox}>
+      <div className="mb-6">
+        <label className="flex items-center">
           <input 
             type="checkbox" 
             id="robot" 
@@ -115,15 +117,20 @@ export default function ContactForm() {
             required
             checked={formData.robot} 
             onChange={handleInputChange} 
+            className="mr-2"
           />
           I accept that I will not be sending any spam messages.
         </label>
       </div>
-      <button type="submit" className={styles.button} disabled={isButtonDisabled || status === 'loading'}>
+      <button 
+        type="submit" 
+        className="w-full py-3 bg-primary text-button-text border-none rounded-md cursor-pointer transition-colors duration-300 text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+        disabled={isButtonDisabled || status === 'loading'}
+      >
         {status === 'loading' ? 'Sending...' : 'Send'}
       </button>
-      {status === 'success' && <p className={styles.successMessage}>Message sent successfully!</p>}
-      {status === 'error' && <p className={styles.errorMessage}>Failed to send message. Please try again.</p>}
+      {status === 'success' && <p className="text-green-500 mt-4">Message sent successfully!</p>}
+      {status === 'error' && <p className="text-red-500 mt-4">Failed to send message. Please try again.</p>}
     </form>
   )
 }

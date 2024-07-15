@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import styles from './TypingEffect.module.css';
 
 interface TypingEffectProps {
   strings: string[];
@@ -54,9 +53,9 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   }, [currentText, isDeleting, currentStringIndex, strings, typingSpeed, deletingSpeed, delayBetweenStrings]);
 
   return (
-    <span className={styles.typingEffectContainer}>
+    <span className="inline-block relative">
       {currentText}
-      <span className={styles.cursor}>|</span>
+      <span className="inline-block w-[3px] animate-blink">|</span>
     </span>
   );
 };
