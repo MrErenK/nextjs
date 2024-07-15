@@ -20,27 +20,18 @@ const Navbar: React.FC = () => {
         <div className={styles.menuIcon} onClick={toggleNavbar}>
           {isOpen ? '✕' : '☰'}
         </div>
-        <ul className={isOpen ? `${styles.navMenu} ${styles.active}` : styles.navMenu}>
-          <li className={styles.navItem}>
-            <Link href="/home" className={styles.navLinks} onClick={toggleNavbar}>
-              Home
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/stuff" className={styles.navLinks} onClick={toggleNavbar}>
-              Projects
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/about" className={styles.navLinks} onClick={toggleNavbar}>
-              About
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/contact" className={styles.navLinks} onClick={toggleNavbar}>
-              Contact
-            </Link>
-          </li>
+        <ul className={`${styles.navMenu} ${isOpen ? styles.active : ''}`}>
+          {['home', 'stuff', 'about', 'contact'].map((link) => (
+            <li key={link} className={styles.navItem}>
+              <Link
+                href={`/${link}`}
+                className={styles.navLinks}
+                onClick={toggleNavbar}
+              >
+                {link.charAt(0).toUpperCase() + link.slice(1)}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
