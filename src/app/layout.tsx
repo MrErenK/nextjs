@@ -6,9 +6,9 @@ import Navbar from './components/Navbar';
 import { Providers } from './providers'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
-import Loading from './components/Loading'
-import PageTransition from './components/PageTransition'
+import dynamic from 'next/dynamic';
+
+const PageTransition = dynamic(() => import('./components/PageTransition'), { ssr: false });
 
 config.autoAddCss = false
 
@@ -52,11 +52,9 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             <main className="flex-grow relative">
-              <Suspense fallback={<Loading />}>
-                <PageTransition>
-                  {children}
-                </PageTransition>
-              </Suspense>
+              <PageTransition>
+                {children}
+              </PageTransition>
               <SpeedInsights />
             </main>
           </Providers>

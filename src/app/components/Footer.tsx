@@ -1,16 +1,23 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import styles from './Footer.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+
+const FontAwesomeIcon = dynamic(
+  () => import('@fortawesome/react-fontawesome').then((mod) => mod.FontAwesomeIcon),
+  { ssr: false }
+);
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [GitHubIcon, setGitHubIcon] = useState<IconDefinition | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
+    import('@fortawesome/free-brands-svg-icons/faGithub').then((mod) => setGitHubIcon(mod.faGithub));
   }, []);
 
   const currentYear = new Date().getFullYear();
@@ -34,7 +41,7 @@ const Footer = () => {
             rel="noopener noreferrer" 
             aria-label="GitHub"
           >
-            <FontAwesomeIcon icon={faGithub} className={styles.icon} />
+            {GitHubIcon && <FontAwesomeIcon icon={GitHubIcon} className={styles.icon} />}
           </a>
         </div>
       </div>

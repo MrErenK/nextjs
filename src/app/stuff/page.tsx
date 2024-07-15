@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
 import styles from './Stuff.module.css'
-import Footer from '../components/Footer'
+import dynamic from 'next/dynamic'
 import StuffContent from './StuffContent'
 import ThemeToggle from '../components/ThemeToggle'
+
+const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'My Stuff - MrErenK',
@@ -14,7 +16,7 @@ export default function Stuff() {
     <div className={styles.stuffPage}>
       <main className={`${styles.content} ${styles.fadeIn}`}>
         <h1 className={styles.title}>My Stuff</h1>
-        <p className={styles.subtitle}>Here you can find the projects I'm working on.</p>
+        <p className={styles.subtitle}>Here you can find the projects I&apos;m working on.</p>
         <div className={styles.themeToggleWrapper}>
           <ThemeToggle />
         </div>

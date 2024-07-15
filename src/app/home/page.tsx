@@ -14,7 +14,7 @@ const MovingBackground = dynamic(() => import('../components/MovingBackground'),
 })
 const TypingEffect = dynamic(() => import('../components/TypingEffect'), { 
   ssr: false,
-  loading: () => <span>I'm Eren.</span>
+  loading: () => <span>I&apos;m Eren.</span>
 })
 
 export default function Home() {

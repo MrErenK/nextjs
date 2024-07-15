@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './MovingBackground.module.css';
 
@@ -8,56 +8,69 @@ interface MovingBackgroundProps {
   imageUrl: string;
 }
 
-const MovingBackground: React.FC<MovingBackgroundProps> = ({ imageUrl }) => {
+const MovingBackground: React.FC<MovingBackgroundProps> = React.memo(({ imageUrl }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isMobile, setIsMobile] = useState(false);
+  const [isStatic, setIsStatic] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)');
-    setIsMobile(mediaQuery.matches);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    const handleChange = () => {
+      setIsStatic(mediaQuery.matches || prefersReducedMotion.matches);
+    };
 
-    const handleResize = () => setIsMobile(mediaQuery.matches);
-    mediaQuery.addEventListener('change', handleResize);
+    handleChange(); // Set initial state
+    mediaQuery.addEventListener('change', handleChange);
+    prefersReducedMotion.addEventListener('change', handleChange);
 
-    return () => mediaQuery.removeEventListener('change', handleResize);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      prefersReducedMotion.removeEventListener('change', handleChange);
+    };
   }, []);
 
-  useEffect(() => {
-    if (isMobile) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!isStatic) {
       setPosition({
         x: -e.clientX / 100,
         y: -e.clientY / 100
       });
-    };
+    }
+  }, [isStatic]);
 
-    window.addEventListener('mousemove', handleMouseMove);
+  useEffect(() => {
+    if (!isStatic) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isMobile]);
+  }, [isStatic, handleMouseMove]);
 
   return (
     <div 
-      className={`${styles.backgroundContainer} ${isMobile ? styles.mobile : ''} ${isLoaded ? styles.loaded : ''}`}
+      className={`${styles.backgroundContainer} ${isStatic ? styles.static : ''} ${isLoaded ? styles.loaded : ''}`}
       style={{
-        transform: isMobile ? 'none' : `translate(${position.x}px, ${position.y}px)`
+        transform: isStatic ? 'none' : `translate(${position.x}px, ${position.y}px)`
       }}
     >
       <Image
         src={imageUrl}
         fill
         style={{ objectFit: 'cover' }}
-        quality={100}
+        quality={85}
         priority
         onLoad={() => setIsLoaded(true)}
         alt="Background"
+        sizes="100vw"
       />
     </div>
   );
-};
+});
+
+MovingBackground.displayName = 'MovingBackground';
 
 export default MovingBackground;

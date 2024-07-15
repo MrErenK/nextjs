@@ -29,7 +29,7 @@ export default function Error({
     <main className={styles.errorContainer}>
       <div className={styles.errorContent}>
         <h1 className={styles.errorTitle}>Oops!</h1>
-        <p className={styles.errorMessage}>Something went wrong. We're working on fixing it.</p>
+        <p className={styles.errorMessage}>Something went wrong. We&apos;re working on fixing it.</p>
         <div className={styles.buttonContainer}>
           <button 
             onClick={handleReset} 

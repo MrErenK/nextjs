@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className={styles.errorContainer}>
       <div className={styles.errorContent}>
         <h1 className={styles.errorTitle}>404</h1>
-        <p className={styles.errorMessage}>Oops! The page you're looking for doesn't exist.</p>
+        <p className={styles.errorMessage}>Oops! The page you&apos;re looking for doesn&apos;t exist.</p>
         <div className={styles.buttonContainer}>
           <Link href="/" className={`${styles.button} ${styles.buttonPrimary}`}>
             Back to Home

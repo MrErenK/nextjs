@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
 import styles from './Contact.module.css'
-import Footer from '../components/Footer'
+import dynamic from 'next/dynamic'
 import ContactForm from './ContactForm'
 import ThemeToggle from '../components/ThemeToggle'
+
+const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Contact Me - MrErenK',

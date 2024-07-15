@@ -11,20 +11,15 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@types/node": "^20.14.10",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
     "@vercel/speed-insights": "^1.0.12",
-    "critters": "^0.0.24",
+    "form-data": "^4.0.0",
     "framer-motion": "^11.3.2",
     "mailgun.js": "^10.2.1",
     "next": "^14.2.5",
     "next-themes": "^0.3.0",
-    "prop-types": "^15.8.1",
     "react": "^18.3.1",
-    "react-dom": "^18",
+    "react-dom": "^18.3.1",
     "sharp": "^0.33.4",
     "sweetalert2": "^11.12.2"
   },
@@ -32,10 +27,11 @@
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "eslint": "^8",
+    "critters": "^0.0.24",
+    "eslint": "^8.57.0",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "^3.4.5",
     "typescript": "^5.5.3"
   }
 }

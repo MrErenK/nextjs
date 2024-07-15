@@ -1,18 +1,24 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Swal from 'sweetalert2'
 import styles from './Stuff.module.css'
+import Swal from 'sweetalert2'
 
 export default function StuffContent() {
   const [copied, setCopied] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
+  const copyToClipboard = async (text: string) => {
+    if (typeof window === 'undefined') return;
+
+    try {
+      await navigator.clipboard.writeText(text)
       setCopied(true)
+      
       Swal.fire({
         icon: 'success',
         title: 'Server IP Copied!',
@@ -20,15 +26,17 @@ export default function StuffContent() {
         showConfirmButton: false,
         timer: 1500
       })
+      
       setTimeout(() => setCopied(false), 2000)
-    }).catch((err) => {
+    } catch (err) {
       console.error('Unable to copy to clipboard', err)
+      
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Unable to copy to clipboard. Please try again.'
       })
-    })
+    }
   }
 
   const links = [
