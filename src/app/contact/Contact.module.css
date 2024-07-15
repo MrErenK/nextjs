@@ -1,15 +1,21 @@
 .contactPage {
   min-height: 100vh;
-  padding: 2rem;
-  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-color);
   color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-bottom: 10vh;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  padding-bottom: 20vh;
 }
 
 .themeToggleWrapper {
@@ -26,6 +32,18 @@
   color: var(--primary-color);
 }
 
+.fadeIn {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* ContactForm styles */
 .form {
   width: 100%;
   max-width: 500px;
@@ -85,27 +103,24 @@
   cursor: not-allowed;
 }
 
-.fadeIn {
-  animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.contactPage {
-  animation: fadeIn 1s ease-in-out;
-}
-
 .errorMessage {
   color: var(--error-color);
   font-size: 0.8rem;
   margin-top: 0.25rem;
 }
 
+.successMessage {
+  color: green;
+  margin-top: 10px;
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 10px;
+}
+
 @media (max-width: 768px) {
-  .contactPage {
+  .content {
     padding: 1rem;
     padding-top: 60px;
   }
@@ -160,18 +175,4 @@
     padding: 0.5rem;
     font-size: 0.8rem;
   }
-}
-
-.successMessage {
-  color: green;
-  margin-top: 10px;
-}
-
-.errorMessage {
-  color: red;
-  margin-top: 10px;
-}
-
-.main {
-  flex: 1;
 }

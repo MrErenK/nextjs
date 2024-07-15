@@ -12,7 +12,7 @@ export default function About() {
   return (
     <div className={styles.aboutPage}>
       <div className={styles.mainContent}>
-        <div className={styles.content}>
+        <div className={`${styles.content} ${styles.fadeIn}`}>
           <h1 className={styles.title}>About Me</h1>
           <div className={styles.introduction}>
             <h2>Hello,</h2>
@@ -23,7 +23,7 @@ export default function About() {
           </p>
         </div>
       </div>
-      <div className="absolute top-5 right-5">
+      <div className={styles.themeToggleWrapper}>
         <ThemeToggle />
       </div>
       <Footer />

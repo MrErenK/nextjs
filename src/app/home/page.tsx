@@ -14,16 +14,16 @@ const MovingBackground = dynamic(() => import('../components/MovingBackground'),
 })
 const TypingEffect = dynamic(() => import('../components/TypingEffect'), { 
   ssr: false,
-  loading: () => <span>I'm Eren.</span> // Fallback while component is loading
+  loading: () => <span>I'm Eren.</span>
 })
 
 export default function Home() {
   return (
-    <div className={`${styles.pageWrapper} ${styles.fadeIn}`}>
+    <div className={styles.pageWrapper}>
       <MovingBackground imageUrl="/space.jpg" />
       <div className={styles.homePage}>
         <div className={styles.heroContainer}>
-          <div className={styles.content}>
+          <div className={`${styles.content} ${styles.fadeIn}`}>
             <h1 className={styles.greeting}>
               Hello,<br />
               <TypingEffect 

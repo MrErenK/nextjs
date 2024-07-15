@@ -1,9 +1,12 @@
 .pageWrapper {
-  position: relative;
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  animation: fadeIn 1s ease-in-out;
+  overflow: hidden;
 }
 
 .homePage {
@@ -13,6 +16,7 @@
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
+  overflow: auto;
 }
 
 .heroContainer {
@@ -25,6 +29,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   max-width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .greeting {
@@ -32,11 +37,12 @@
   font-weight: bold;
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  animation: fadeIn 2s ease-in-out;
 }
 
 .fadeIn {
-  animation: fadeIn 0.5s ease-in;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+  animation-delay: 0.2s;
 }
 
 @keyframes fadeIn {

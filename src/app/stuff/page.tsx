@@ -11,15 +11,15 @@ export const metadata: Metadata = {
 
 export default function Stuff() {
   return (
-    <div className={`${styles.stuffPage}`}>
-      <div className={styles.content}>
+    <div className={styles.stuffPage}>
+      <main className={`${styles.content} ${styles.fadeIn}`}>
         <h1 className={styles.title}>My Stuff</h1>
         <p className={styles.subtitle}>Here you can find the projects I'm working on.</p>
         <div className={styles.themeToggleWrapper}>
           <ThemeToggle />
         </div>
         <StuffContent />
-      </div>
+      </main>
       <Footer />
     </div>
   )

@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <div className={`${styles.contactPage}`}>
-      <div className={styles.content}>
+    <div className={styles.contactPage}>
+      <main className={`${styles.content} ${styles.fadeIn}`}>
         <h1 className={styles.title}>Contact Me</h1>
         <div className={styles.themeToggleWrapper}>
           <ThemeToggle />
         </div>
         <ContactForm />
-      </div>
+      </main>
       <Footer />
     </div>
   )
