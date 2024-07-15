@@ -4,16 +4,18 @@ import React, { useState, useEffect, useRef } from 'react';
 
 interface TypingEffectProps {
   strings: string[];
-  typingSpeed?: number;
-  deletingSpeed?: number;
+  baseTypingSpeed?: number;
+  baseDeletingSpeed?: number;
   delayBetweenStrings?: number;
+  maxDeletionChars?: number;
 }
 
 const TypingEffect: React.FC<TypingEffectProps> = ({
   strings,
-  typingSpeed = 100,
-  deletingSpeed = 50,
-  delayBetweenStrings = 1000
+  baseTypingSpeed = 100,
+  baseDeletingSpeed = 50,
+  delayBetweenStrings = 1000,
+  maxDeletionChars = 5  // Maximum number of characters to delete at once
 }) => {
   const [currentStringIndex, setCurrentStringIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
@@ -21,13 +23,31 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   const fullTextRef = useRef('');
 
   useEffect(() => {
+    const calculateSpeed = (baseSpeed: number, textLength: number): number => {
+      const minSpeed = baseSpeed * 0.5;
+      const maxSpeed = baseSpeed * 1.5;
+      const speedRange = maxSpeed - minSpeed;
+      const maxLength = Math.max(...strings.map(s => s.length));
+      
+      const speed = maxSpeed - (speedRange * (1 - textLength / maxLength));
+      return Math.max(minSpeed, Math.min(maxSpeed, speed));
+    };
+
+    const calculateDeletionChars = (textLength: number): number => {
+      // Calculate number of chars to delete based on remaining text length
+      return Math.max(1, Math.min(maxDeletionChars, Math.floor(textLength / 5)));
+    };
     let timeout: NodeJS.Timeout;
 
     const updateText = () => {
+      const currentString = strings[currentStringIndex];
+      
       if (isDeleting) {
         if (displayedText.length > 0) {
-          setDisplayedText(prev => prev.slice(0, -1));
-          timeout = setTimeout(updateText, deletingSpeed);
+          const charsToDelete = calculateDeletionChars(displayedText.length);
+          setDisplayedText(prev => prev.slice(0, -charsToDelete));
+          const speed = calculateSpeed(baseDeletingSpeed, displayedText.length);
+          timeout = setTimeout(updateText, speed);
         } else {
           setIsDeleting(false);
           setCurrentStringIndex((prev) => (prev + 1) % strings.length);
@@ -35,11 +55,11 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
           timeout = setTimeout(updateText, delayBetweenStrings);
         }
       } else {
-        const currentString = strings[currentStringIndex];
         if (fullTextRef.current.length < currentString.length) {
           fullTextRef.current = currentString.slice(0, fullTextRef.current.length + 1);
           setDisplayedText(fullTextRef.current);
-          timeout = setTimeout(updateText, typingSpeed);
+          const speed = calculateSpeed(baseTypingSpeed, currentString.length);
+          timeout = setTimeout(updateText, speed);
         } else {
           timeout = setTimeout(() => {
             setIsDeleting(true);
@@ -49,10 +69,10 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
       }
     };
 
-    timeout = setTimeout(updateText, typingSpeed);
+    timeout = setTimeout(updateText, baseTypingSpeed);
 
     return () => clearTimeout(timeout);
-  }, [currentStringIndex, isDeleting, strings, typingSpeed, deletingSpeed, delayBetweenStrings, displayedText]);
+  }, [currentStringIndex, isDeleting, strings, baseTypingSpeed, baseDeletingSpeed, delayBetweenStrings, displayedText, maxDeletionChars]);
 
   return (
     <span className="inline-block relative">

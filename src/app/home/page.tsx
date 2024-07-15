@@ -39,9 +39,10 @@ export default function Home() {
                   Hello,<br />
                   <TypingEffect 
                     strings={['I\'m Eren.', 'You can call me MrErenK.', 'I\'m a newbie developer', 'living in Türkiye.']} 
-                    typingSpeed={60}
-                    deletingSpeed={50}
+                    baseTypingSpeed={80}
+                    baseDeletingSpeed={25}
                     delayBetweenStrings={1200}
+                    maxDeletionChars={2}
                   />
                 </h1>
               </div>
