@@ -15,7 +15,7 @@ export default function ThemeToggle() {
 
   return (
     <div 
-      className={`relative w-15 h-[30px] rounded-full cursor-pointer transition-colors duration-300 ease-in-out ${
+      className={`z-49 relative w-15 h-[30px] rounded-full cursor-pointer transition-colors duration-300 ease-in-out ${
         resolvedTheme === 'dark' ? 'bg-gray-700' : 'bg-blue-500'
       }`}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}

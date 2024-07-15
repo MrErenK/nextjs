@@ -27,7 +27,7 @@ const Footer = () => {
 
   return (
     <footer 
-      className={`fixed bottom-2.5 left-1/2 transform -translate-x-1/2 bg-opacity-60 bg-gray-800 dark:bg-gray-700 px-4 py-2 rounded-full shadow-lg backdrop-blur-sm z-50 transition-all duration-300 ease-in-out ${isHovered ? 'opacity-100 bg-opacity-80' : 'opacity-70'}`}
+      className={`fixed bottom-2.5 left-1/2 transform -translate-x-1/2 bg-opacity-60 bg-gray-800 dark:bg-gray-700 px-4 py-2 rounded-full shadow-lg backdrop-blur-sm z-49 transition-all duration-300 ease-in-out ${isHovered ? 'opacity-100 bg-opacity-80' : 'opacity-70'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -18,7 +18,7 @@ export default function Stuff() {
         <main className="flex-1 p-8 pt-16 pb-[15vh] overflow-y-auto relative">
           <h1 className="text-4xl text-center mb-4 text-title-color">My Stuff</h1>
           <p className="text-center mb-8">Here you can find the projects I&apos;m working on.</p>
-          <div className="absolute top-5 right-5 z-50">
+          <div className="absolute top-5 right-5">
             <ThemeToggle />
           </div>
           <StuffContent />
