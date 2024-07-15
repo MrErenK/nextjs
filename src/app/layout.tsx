@@ -1,5 +1,5 @@
 import { Metadata, Viewport } from 'next'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Inter } from 'next/font/google'
 import './styles/globals.css'
 import Navbar from './components/Navbar';
@@ -7,6 +7,8 @@ import { Providers } from './providers'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import Loading from './components/Loading'
+import PageTransition from './components/PageTransition'
 
 config.autoAddCss = false
 
@@ -50,7 +52,11 @@ export default function RootLayout({
           <Providers>
             <Navbar />
             <main className="flex-grow relative">
-              {children}
+              <Suspense fallback={<Loading />}>
+                <PageTransition>
+                  {children}
+                </PageTransition>
+              </Suspense>
               <SpeedInsights />
             </main>
           </Providers>
