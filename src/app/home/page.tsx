@@ -38,10 +38,10 @@ export default function Home() {
                 <h1 className="text-4xl md:text-5xl font-bold text-white text-shadow">
                   Hello,<br />
                   <TypingEffect 
-                    strings={['I\'m Eren.', 'You can call me MrErenK.', 'I\'m a newbie developer', 'living in Turkiye.']} 
-                    typingSpeed={100}
+                    strings={['I\'m Eren.', 'You can call me MrErenK.', 'I\'m a newbie developer', 'living in Türkiye.']} 
+                    typingSpeed={60}
                     deletingSpeed={50}
-                    delayBetweenStrings={1000}
+                    delayBetweenStrings={1200}
                   />
                 </h1>
               </div>

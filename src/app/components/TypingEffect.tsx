@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface TypingEffectProps {
   strings: string[];
@@ -16,45 +16,47 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   delayBetweenStrings = 1000
 }) => {
   const [currentStringIndex, setCurrentStringIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const fullTextRef = useRef('');
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
-    const type = () => {
-      const currentString = strings[currentStringIndex];
-      
+    const updateText = () => {
       if (isDeleting) {
-        setCurrentText(prev => prev.slice(0, -1));
-        if (currentText === '') {
+        if (displayedText.length > 0) {
+          setDisplayedText(prev => prev.slice(0, -1));
+          timeout = setTimeout(updateText, deletingSpeed);
+        } else {
           setIsDeleting(false);
           setCurrentStringIndex((prev) => (prev + 1) % strings.length);
-          timeout = setTimeout(type, delayBetweenStrings);
-        } else {
-          timeout = setTimeout(type, deletingSpeed);
+          fullTextRef.current = '';
+          timeout = setTimeout(updateText, delayBetweenStrings);
         }
       } else {
-        setCurrentText(currentString.slice(0, currentText.length + 1));
-        if (currentText === currentString) {
+        const currentString = strings[currentStringIndex];
+        if (fullTextRef.current.length < currentString.length) {
+          fullTextRef.current = currentString.slice(0, fullTextRef.current.length + 1);
+          setDisplayedText(fullTextRef.current);
+          timeout = setTimeout(updateText, typingSpeed);
+        } else {
           timeout = setTimeout(() => {
             setIsDeleting(true);
-            timeout = setTimeout(type, delayBetweenStrings);
+            timeout = setTimeout(updateText, delayBetweenStrings);
           }, delayBetweenStrings);
-        } else {
-          timeout = setTimeout(type, typingSpeed);
         }
       }
     };
 
-    timeout = setTimeout(type, typingSpeed);
+    timeout = setTimeout(updateText, typingSpeed);
 
     return () => clearTimeout(timeout);
-  }, [currentText, isDeleting, currentStringIndex, strings, typingSpeed, deletingSpeed, delayBetweenStrings]);
+  }, [currentStringIndex, isDeleting, strings, typingSpeed, deletingSpeed, delayBetweenStrings, displayedText]);
 
   return (
     <span className="inline-block relative">
-      {currentText}
+      {displayedText}
       <span className="inline-block w-[3px] animate-blink">|</span>
     </span>
   );
