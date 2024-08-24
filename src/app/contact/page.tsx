@@ -1,15 +1,18 @@
-import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
-import ContactForm from './ContactForm'
-import ThemeToggle from '../components/ThemeToggle'
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
+import ContactForm from "./ContactForm";
+import ThemeToggle from "@/components/ThemeToggle";
 
-const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
-const FadeInEffect = dynamic(() => import('../components/FadeInEffect').then((mod) => mod.FadeInEffect), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
+const FadeInEffect = dynamic(
+  () => import("@/components/FadeInEffect").then((mod) => mod.FadeInEffect),
+  { ssr: false },
+);
 
 export const metadata: Metadata = {
-  title: 'Contact Me - MrErenK',
-  description: 'Get in touch with MrErenK',
-}
+  title: "Contact Me - MrErenK",
+  description: "Get in touch with MrErenK",
+};
 
 export default function Contact() {
   return (
@@ -25,5 +28,5 @@ export default function Contact() {
         <Footer />
       </div>
     </FadeInEffect>
-  )
+  );
 }

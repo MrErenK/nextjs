@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export function FadeInEffect({ children }: { children: React.ReactNode }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +10,9 @@ export function FadeInEffect({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <div
+      className={`transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"}`}
+    >
       {children}
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Loading() {
   return (
@@ -9,7 +9,8 @@ export default function Loading() {
             key={index}
             className="box-border block absolute w-16 h-16 m-2 border-4 border-[var(--primary-color)] rounded-full animate-spinner"
             style={{
-              borderColor: 'var(--primary-color) transparent transparent transparent',
+              borderColor:
+                "var(--primary-color) transparent transparent transparent",
               animationDelay: `${-0.15 * (3 - index)}s`,
             }}
           ></div>
