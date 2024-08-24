@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <FadeInEffect>
-      <div className="min-h-screen flex flex-col bg-bg-color text-text-color transition-colors duration-300 pb-[10vh]">
-        <main className="flex-1 p-8 pt-16 flex flex-col items-center relative">
+      <div className="min-h-screen flex flex-col bg-bg-color text-text-color transition-colors duration-300">
+        <header className="p-4 flex justify-end">
+          <ThemeToggle />
+        </header>
+        <main className="flex-1 p-8 flex flex-col items-center">
           <h1 className="text-4xl text-center mb-8 text-primary">Contact Me</h1>
-          <div className="absolute top-5 right-5">
-            <ThemeToggle />
-          </div>
           <ContactForm />
         </main>
         <Footer />

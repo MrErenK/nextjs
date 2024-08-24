@@ -22,7 +22,10 @@ export default function About() {
       <ScrollLock />
       <FadeInEffect>
         <div className="min-h-screen md:h-screen md:overflow-y-auto flex flex-col bg-[var(--bg-color)] text-[var(--text-color)] transition-colors duration-300 ease-in-out pb-[10vh] overflow-x-hidden">
-          <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
+          <header className="p-4 flex justify-end">
+            <ThemeToggle />
+          </header>
+          <main className="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
             <div className="w-full max-w-[800px] p-4 sm:p-8 bg-[var(--content-background)] rounded-lg shadow-md mx-auto transition-colors duration-300 ease-in-out">
               <h1 className="text-2xl sm:text-4xl mb-6 text-center text-[var(--title-color)] transition-colors duration-300 ease-in-out">
                 About Me
@@ -42,10 +45,7 @@ export default function About() {
                 Project), Custom Kernel development, and more.
               </p>
             </div>
-          </div>
-          <div className="absolute top-4 right-4">
-            <ThemeToggle />
-          </div>
+          </main>
           <Footer />
         </div>
       </FadeInEffect>

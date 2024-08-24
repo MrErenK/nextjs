@@ -1,9 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent, FocusEvent } from "react";
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+  robot: boolean;
+}
+
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
@@ -12,9 +21,7 @@ export default function ContactForm() {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [showMessageError, setShowMessageError] = useState(false);
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [status, setStatus] = useState<FormStatus>("idle");
 
   useEffect(() => {
     const { name, email, message, robot } = formData;
@@ -27,13 +34,12 @@ export default function ContactForm() {
   }, [formData]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value, type } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]:
-        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
 
     if (name === "message") {
@@ -41,7 +47,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+  const handleBlur = (e: FocusEvent<HTMLTextAreaElement>) => {
     if (e.target.name === "message") {
       setShowMessageError(
         e.target.value.trim().length > 0 && e.target.value.trim().length < 30,
@@ -49,7 +55,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
 
@@ -66,7 +72,7 @@ export default function ContactForm() {
         setStatus("success");
         setFormData({ name: "", email: "", message: "", robot: false });
       } else {
-        setStatus("error");
+setStatus("error");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -77,10 +83,10 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-lg bg-form-bg-color p-8 rounded-lg"
+      className="w-full max-w-lg bg-form-bg-color p-8 rounded-lg shadow-md"
     >
       <div className="mb-6">
-        <label htmlFor="name" className="block mb-2">
+        <label htmlFor="name" className="block mb-2 font-semibold">
           Name
         </label>
         <input
@@ -91,11 +97,11 @@ export default function ContactForm() {
           required
           value={formData.name}
           onChange={handleInputChange}
-          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base"
+          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base focus:outline-none focus:ring-2 focus:ring-primary"
         />
       </div>
       <div className="mb-6">
-        <label htmlFor="email" className="block mb-2">
+        <label htmlFor="email" className="block mb-2 font-semibold">
           Email
         </label>
         <input
@@ -106,11 +112,11 @@ export default function ContactForm() {
           required
           value={formData.email}
           onChange={handleInputChange}
-          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base"
+          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base focus:outline-none focus:ring-2 focus:ring-primary"
         />
       </div>
       <div className="mb-6">
-        <label htmlFor="message" className="block mb-2">
+        <label htmlFor="message" className="block mb-2 font-semibold">
           Message
         </label>
         <textarea
@@ -122,11 +128,11 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleInputChange}
           onBlur={handleBlur}
-          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base"
+          className="w-full p-2 border border-primary bg-input-bg-color text-text-color rounded-md text-base focus:outline-none focus:ring-2 focus:ring-primary"
         ></textarea>
         {showMessageError && (
           <p className="text-error-color text-sm mt-1">
-            Please enter at least 30 characters.
+Please enter at least 30 characters.
           </p>
         )}
       </div>
@@ -141,21 +147,23 @@ export default function ContactForm() {
             onChange={handleInputChange}
             className="mr-2"
           />
-          I accept that I will not be sending any spam messages.
+          <span className="text-sm">
+            I accept that I will not be sending any spam messages.
+          </span>
         </label>
       </div>
       <button
         type="submit"
-        className="w-full py-3 bg-primary text-button-text border-none rounded-md cursor-pointer transition-colors duration-300 text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90"
+        className="w-full py-3 bg-primary text-button-text border-none rounded-md cursor-pointer transition-colors duration-300 text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         disabled={isButtonDisabled || status === "loading"}
       >
         {status === "loading" ? "Sending..." : "Send"}
       </button>
       {status === "success" && (
-        <p className="text-green-500 mt-4">Message sent successfully!</p>
+        <p className="text-green-500 mt-4 text-center font-semibold">Message sent successfully!</p>
       )}
       {status === "error" && (
-        <p className="text-red-500 mt-4">
+        <p className="text-red-500 mt-4 text-center font-semibold">
           Failed to send message. Please try again.
         </p>
       )}

@@ -1,61 +1,66 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { faGithub, faTelegram } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const FontAwesomeIcon = dynamic(
-  () =>
-    import("@fortawesome/react-fontawesome").then((mod) => mod.FontAwesomeIcon),
-  { ssr: false },
-);
-
-const Footer = () => {
+const Footer: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const [GitHubIcon, setGitHubIcon] = useState<IconDefinition | null>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-    import("@fortawesome/free-brands-svg-icons/faGithub").then((mod) =>
-      setGitHubIcon(mod.faGithub),
-    );
-  }, []);
-
   const currentYear = new Date().getFullYear();
 
-  if (!isMounted) {
-    return null;
-  }
+  const socialLinks = [
+    { name: "GitHub", icon: faGithub, url: "https://github.com/MrErenK" },
+    { name: "Telegram", icon: faTelegram, url: "https://t.me/Mr_ErenK" },
+  ];
 
   return (
-    <footer
-      className={`fixed bottom-2.5 left-1/2 transform -translate-x-1/2 bg-opacity-60 bg-gray-800 dark:bg-gray-700 px-4 py-2 rounded-full shadow-lg backdrop-blur-sm z-49 transition-all duration-300 ease-in-out ${isHovered ? "opacity-100 bg-opacity-80" : "opacity-70"}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="flex justify-between items-center gap-4">
-        <p className="m-0 text-white text-sm font-medium tracking-wide">
-          &copy; {currentYear} MrErenK
-        </p>
-        <div className="flex">
-          <a
-            href="https://github.com/MrErenK"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-white hover:text-blue-400 transition-colors duration-300"
-          >
-            {GitHubIcon && (
-              <FontAwesomeIcon
-                icon={GitHubIcon}
-                className="text-2xl transition-transform duration-300 hover:scale-110"
-              />
-            )}
-          </a>
-        </div>
-      </div>
-    </footer>
+    <AnimatePresence>
+      <motion.footer
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        className="fixed bottom-4 left-0 right-0 flex justify-center items-center z-49 px-4"
+      >
+        <motion.div
+          animate={{
+            backgroundColor: isHovered
+              ? "rgba(31, 41, 55, 0.9)"
+              : "rgba(31, 41, 55, 0.7)",
+            backdropFilter: isHovered ? "blur(10px)" : "blur(5px)",
+          }}
+          transition={{ duration: 0.3 }}
+          className="px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg max-w-full sm:max-w-max"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between space-y-2 sm:space-y-0 sm:space-x-4">
+            <p className="text-white text-xs sm:text-sm font-medium text-center sm:text-left">
+              &copy; {currentYear} MrErenK
+            </p>
+            <div className="flex space-x-3">
+              {socialLinks.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.name}
+                  className="text-white hover:text-blue-400 transition-colors duration-300"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <FontAwesomeIcon
+                    icon={link.icon}
+                    className="text-lg sm:text-xl"
+                  />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </motion.footer>
+    </AnimatePresence>
   );
 };
 

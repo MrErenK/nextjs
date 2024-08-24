@@ -14,18 +14,17 @@ const MovingBackground = dynamic(
     loading: () => <div className="fixed inset-0 bg-bg-color -z-10" />,
   },
 );
+
 const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
   ssr: false,
   loading: () => <span>I&apos;m Eren.</span>,
 });
 
-// Client-side only component for fade-in effect
 const FadeInEffect = dynamic(
   () => import("@/components/FadeInEffect").then((mod) => mod.FadeInEffect),
   { ssr: false },
 );
 
-// Import ScrollLock component
 const ScrollLock = dynamic(() => import("@/components/ScrollLock"), {
   ssr: false,
 });
@@ -37,7 +36,7 @@ export default function Home() {
       <FadeInEffect>
         <div className="min-h-screen md:fixed md:inset-0 flex flex-col">
           <MovingBackground imageUrl="/space.jpg" />
-          <div className="flex-1 flex items-center justify-center p-5">
+          <main className="flex-1 flex items-center justify-center p-5">
             <div className="z-10">
               <div className="text-center p-5 bg-black bg-opacity-50 rounded-3xl max-w-full shadow-lg">
                 <h1 className="text-4xl md:text-5xl font-bold text-white text-shadow">
@@ -58,7 +57,7 @@ export default function Home() {
                 </h1>
               </div>
             </div>
-          </div>
+          </main>
         </div>
       </FadeInEffect>
     </>

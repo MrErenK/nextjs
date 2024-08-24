@@ -18,16 +18,14 @@ export default function Stuff() {
   return (
     <FadeInEffect>
       <div className="min-h-screen flex flex-col bg-bg-color text-text-color transition-colors duration-300">
-        <main className="flex-1 p-8 pt-16 pb-[15vh] overflow-y-auto relative">
-          <h1 className="text-4xl text-center mb-4 text-title-color">
-            My Stuff
-          </h1>
-          <p className="text-center mb-8">
+        <header className="p-4 flex justify-between items-center">
+          <h1 className="text-4xl font-bold text-title-color">My Stuff</h1>
+          <ThemeToggle />
+        </header>
+        <main className="flex-1 p-8 overflow-y-auto">
+          <p className="text-center mb-8 text-lg">
             Here you can find the projects I&apos;m working on.
           </p>
-          <div className="absolute top-5 right-5">
-            <ThemeToggle />
-          </div>
           <StuffContent />
         </main>
         <Footer />
