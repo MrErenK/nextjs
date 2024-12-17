@@ -17,18 +17,8 @@ const links: LinkItem[] = [
   },
   {
     title: "Cloud storage",
-    description: "Host for ROMs, kernels, and other developers' work.",
-    url: "https://drive.erensprojects.web.tr",
-  },
-  {
-    title: "Self-hosted git",
-    description: "For private or WIP repos.",
-    url: "https://git.erensprojects.web.tr",
-  },
-  {
-    title: "Self-hosted bin",
-    description: "For pasting logs and other stuff.",
-    url: "https://bin.erensprojects.web.tr",
+    description: "Host for ROMs, kernels, and other developers' work. Send me a private message on telegram to receive an api key.",
+    url: "https://storage.erensprojects.web.tr",
   },
 ];
 

@@ -1,15 +1,8 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import ThemeToggle from "@/components/ThemeToggle";
-
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const FadeInEffect = dynamic(
-  () => import("@/components/FadeInEffect").then((mod) => mod.FadeInEffect),
-  { ssr: false },
-);
-const ScrollLock = dynamic(() => import("@/components/ScrollLock"), {
-  ssr: false,
-});
+import Footer from "@/components/Footer";
+import { FadeInEffect } from "@/components/FadeInEffect";
+import ScrollLock from "@/components/ScrollLock";
 
 export const metadata: Metadata = {
   title: "MrErenK - About Me",

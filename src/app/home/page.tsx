@@ -1,33 +1,13 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
+import MovingBackground from "@/components/MovingBackground";
+import TypingEffect from "@/components/TypingEffect";
+import { FadeInEffect } from "@/components/FadeInEffect";
+import ScrollLock from "@/components/ScrollLock";
 
 export const metadata: Metadata = {
   title: "MrErenK - Home",
   description: "Welcome to MrErenK's personal website.",
 };
-
-// Dynamically import client-side components
-const MovingBackground = dynamic(
-  () => import("@/components/MovingBackground"),
-  {
-    ssr: false,
-    loading: () => <div className="fixed inset-0 bg-bg-color -z-10" />,
-  },
-);
-
-const TypingEffect = dynamic(() => import("@/components/TypingEffect"), {
-  ssr: false,
-  loading: () => <span>I&apos;m Eren.</span>,
-});
-
-const FadeInEffect = dynamic(
-  () => import("@/components/FadeInEffect").then((mod) => mod.FadeInEffect),
-  { ssr: false },
-);
-
-const ScrollLock = dynamic(() => import("@/components/ScrollLock"), {
-  ssr: false,
-});
 
 export default function Home() {
   return (

@@ -1,13 +1,8 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import ContactForm from "./ContactForm";
 import ThemeToggle from "@/components/ThemeToggle";
-
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const FadeInEffect = dynamic(
-  () => import("@/components/FadeInEffect").then((mod) => mod.FadeInEffect),
-  { ssr: false },
-);
+import Footer from "@/components/Footer";
+import { FadeInEffect } from "@/components/FadeInEffect";
 
 export const metadata: Metadata = {
   title: "Contact Me - MrErenK",
