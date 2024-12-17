@@ -39,7 +39,8 @@ export default function ContactForm() {
     const { name, value, type } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
 
     if (name === "message") {
@@ -72,7 +73,7 @@ export default function ContactForm() {
         setStatus("success");
         setFormData({ name: "", email: "", message: "", robot: false });
       } else {
-setStatus("error");
+        setStatus("error");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -132,7 +133,7 @@ setStatus("error");
         ></textarea>
         {showMessageError && (
           <p className="text-error-color text-sm mt-1">
-Please enter at least 30 characters.
+            Please enter at least 30 characters.
           </p>
         )}
       </div>
@@ -160,7 +161,9 @@ Please enter at least 30 characters.
         {status === "loading" ? "Sending..." : "Send"}
       </button>
       {status === "success" && (
-        <p className="text-green-500 mt-4 text-center font-semibold">Message sent successfully!</p>
+        <p className="text-green-500 mt-4 text-center font-semibold">
+          Message sent successfully!
+        </p>
       )}
       {status === "error" && (
         <p className="text-red-500 mt-4 text-center font-semibold">

@@ -14,10 +14,12 @@ export default function Stuff() {
     <FadeInEffect>
       <div className="min-h-screen flex flex-col bg-bg-color text-text-color transition-colors duration-300">
         <header className="p-4 flex justify-between items-center">
-          <h1 className="text-4xl font-bold text-title-color">My Stuff</h1>
+          <div className="flex-1 flex justify-center">
+            <h1 className="text-4xl font-bold text-title-color">My Stuff</h1>
+          </div>
           <ThemeToggle />
         </header>
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className="flex-1 p-8 overflow-y-auto flex flex-col items-center">
           <p className="text-center mb-8 text-lg">
             Here you can find the projects I&apos;m working on.
           </p>
